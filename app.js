@@ -1,13 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
-import axios from 'axios';
 import { config } from 'dotenv';
 import { Configuration, OpenAIApi } from 'openai'; // Import OpenAI API classes
 
 config();
 
 const app = express();
+const port = process.env.PORT || 3000; // Use the provided port or 3000 as a fallback
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -44,7 +45,6 @@ async function generateResponseFromOpenAI(inputText) {
     try {
       const openaiResponse = await generateResponseFromOpenAI(inputText);
       res.json({ response: openaiResponse });
-      console.log(openaiResponse);
     } catch (error) {
       console.error('Error generating response:', error.message);
       res.status(500).json({ error: 'An error occurred while generating the response.' });
@@ -55,5 +55,9 @@ async function generateResponseFromOpenAI(inputText) {
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
 
