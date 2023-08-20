@@ -1,23 +1,28 @@
-body {
+  body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: rgba(223, 78, 38, 0.8); /* Adjust the alpha value (0.8) for opacity */
+    background: linear-gradient(45deg, rgba(223, 78, 38, 0.8) 0%, rgba(222, 131, 41, 0.8) 33%, rgba(255, 252, 0, 0.8) 80%);
   }
-  
+
   .container {
-    max-width: 800px;
+    flex-basis: 800px;
     margin: 0 auto;
     padding: 20px;
   }
-  
   h1 {
     text-align: center;
     margin-bottom: 20px;
+    color: #ffffff;
   }
   
   .chat-box {
-    background-color: #ffffff;
+    background-color: #dab914;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
@@ -25,9 +30,21 @@ body {
   }
   
   .messages {
+    background: rgb(94, 45, 20);
+    background: linear-gradient(45deg, rgba(94, 45, 20, 1) 21%, rgba(73, 42, 18, 1) 45%, rgba(98, 96, 11, 1) 86%);
     max-height: 300px;
     overflow-y: scroll;
+    border-radius: 5px;
+    padding: 10px;
     margin-bottom: 10px;
+  }
+  
+  .messages::-webkit-scrollbar {
+    width: 0.5em; /* Set the width of the scrollbar to control its appearance */
+  }
+  
+  .messages::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0); /* Make the thumb transparent */
   }
   
   .message {
@@ -35,11 +52,11 @@ body {
   }
   
   .user-message {
-    color: #333;
+    color: #f5e31a;
   }
   
   .bot-message {
-    color: #0084ff;
+    color: #ffc800;
   }
   
   .input-container {
@@ -56,13 +73,16 @@ body {
   #send-button {
     padding: 8px 15px;
     border: none;
-    background-color: #0084ff;
-    color: #fff;
+    background-color: #ff6f00;
+    color: #ffffff;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+    transition: 0.3s;
   }
   
   #send-button:hover {
-    background-color: #006fd9;
+    background-color: #f2ff04;
+    color: black;
+    transform: scale(1.1);
   }
   
