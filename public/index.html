@@ -18,45 +18,57 @@
       <div class="messages" id="messages"></div>
     </div>
   </div>
-  <script>
-    const messagesContainer = document.getElementById('messages');
-    const userInput = document.getElementById('user-input');
-    const sendButton = document.getElementById('send-button');
+ <!-- Your HTML content remains the same -->
 
-    sendButton.addEventListener('click', async () => {
-      const inputText = userInput.value.trim();
+<script>
+  const messagesContainer = document.getElementById('messages');
+  const userInput = document.getElementById('user-input');
+  const sendButton = document.getElementById('send-button');
 
-      if (inputText === '') {
-        return;
-      }
+  sendButton.addEventListener('click', async () => {
+    const inputText = userInput.value.trim();
 
-      try {
-        const response = await fetch('/generate-response', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ inputText })
-        });
+    if (inputText === '') {
+      return;
+    }
+    
+    // Disable the button and show loading animation
+    sendButton.disabled = true;
+    sendButton.classList.add('loading');
 
-        const responseData = await response.json();
+    try {
+      const response = await fetch('/generate-response', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ inputText })
+      });
 
-        const userMessage = document.createElement('div');
-        userMessage.classList.add('message', 'user-message');
-        userMessage.textContent = inputText;
+      const responseData = await response.json();
 
-        const botMessage = document.createElement('div');
-        botMessage.classList.add('message', 'bot-message');
-        botMessage.textContent = responseData.response;
+      const userMessage = document.createElement('div');
+      userMessage.classList.add('message', 'user-message');
+      userMessage.textContent = inputText;
 
-        messagesContainer.appendChild(userMessage);
-        messagesContainer.appendChild(botMessage);
+      const botMessage = document.createElement('div');
+      botMessage.classList.add('message', 'bot-message');
+      botMessage.textContent = responseData.response;
 
-        userInput.value = '';
-      } catch (error) {
-        console.error('Error sending request:', error);
-      }
-    });
-  </script>
+      messagesContainer.appendChild(userMessage);
+      messagesContainer.appendChild(botMessage);
+
+      userInput.value = '';
+      
+    } catch (error) {
+      console.error('Error sending request:', error);
+    } finally {
+      // Re-enable the button and remove the loading animation
+      sendButton.disabled = false;
+      sendButton.classList.remove('loading');
+    }
+  });
+</script>
+
 </body>
 </html>

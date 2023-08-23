@@ -9,6 +9,30 @@
     background: rgba(223, 78, 38, 0.8); /* Adjust the alpha value (0.8) for opacity */
     background: linear-gradient(45deg, rgba(223, 78, 38, 0.8) 0%, rgba(222, 131, 41, 0.8) 33%, rgba(255, 252, 0, 0.8) 80%);
   }
+  @keyframes shimmer {
+    0% {
+      background-position: -200%;
+    }
+    100% {
+      background-position: 200%;
+    }
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loading {
+    display: inline-block;
+    animation: spin 1s linear infinite, shimmer 2s infinite linear;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+    background-size: 200% 100%;
+  }
 
   .container {
     flex-basis: 800px;

@@ -31,6 +31,7 @@ async function generateResponseFromOpenAI(inputText) {
     const response = await openAi.createChatCompletion({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: inputText }],
+      max_tokens: 200,
     });
 
     return response.data.choices[0].message.content;
@@ -41,7 +42,7 @@ async function generateResponseFromOpenAI(inputText) {
 
 app.post('/generate-response', async (req, res) => {
   let inputText = req.body.inputText;
-  inputText = inputText + "The given query or statement should strictly be answered in the context of hinduism, vedic, sanatani and hindu philosophy. To convey your answer quote the hindu sacrad texts too. If you think that the query is unrelated to any hindu/sanatani thing then reply that there is not any relation you can find. Use pure honorific hindi for your reply.";
+  inputText = inputText + "Give the response to the prompt as a ai BOT which answers prompts through the context of hinduism(there may be general life questions).The answer should be strictly under 140 words. The response should contain the sanskrit quotes too from where the answer is generated (from vedas, puranas or any other ancient indian texts or reference ). for your reference use all the hindu sacred texts and epics. ";
   try {
     const openaiResponse = await generateResponseFromOpenAI(inputText);
     res.json({ response: openaiResponse });
